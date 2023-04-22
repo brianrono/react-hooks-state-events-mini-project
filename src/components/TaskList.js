@@ -1,21 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
 import Task from "./Task";
-import { TASKS } from "../data";
 
-function TaskList() {
-  const [tasks, setTasks] = useState(TASKS);
-
-  const handleDelete = (taskId) => {
-    setTasks(tasks.filter((task) => task.id !== taskId));
-  };
-
+function TaskList({tasks,click}) {
+  const tasksList = tasks.map((task, id) =>
+  <Task
+    key={id}
+    task={task}
+    text={task.text}
+    category={task.category}
+    click={click}
+  />)
   return (
     <div className="tasks">
-      {tasks.map((task) => (
-        <Task key={task.id} task={task} onDelete={handleDelete} />
-      ))}
+      {tasksList}
     </div>
   );
 }
+
+
 
 export default TaskList;
